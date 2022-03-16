@@ -1,0 +1,50 @@
+<div class="info" role="main">
+    <h4 class="pipe">Fibre for the whole family </h4>
+    <h4 class="pipe">Fast and reliable</h4>
+    <h4>Unlimited Streaming</h4>
+</div>
+
+<div class="filter-section">
+  <h3 class="fibre-heading">Choose a Fibre Package: </h3>
+  <div class="filter-products">
+    <div class="deal-type">
+       <p>Select a Deal Type:</p>
+       <div>
+        <select class="custom-select" name="selectedDealType" [(ngModel)]="selectedDealType" (change)="dealType()">
+          <option *ngFor="let item of dealTypes" [value]="item">{{item}}</option>
+      </select>
+      </div>
+    </div>
+   
+    
+  </div>
+</div>
+
+<div class="fibre-product-section" *ngIf="selectedDealType">
+  <h3 class="fibre-heading">Fibre products </h3>
+  <p>Select a Fibre infrastructure provider below, browse the products available and complete a coverage search</p>      
+      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+        <ng-container *ngFor="let slide of providerInfo">
+          <div ngxSlickItem  class="slide">
+            <div class="provider-slider-card">
+              <input type="checkbox" id="{{slide.name}}" (change)="selectProvider($event)">
+              <label for="{{slide.name}}"><img src="{{ slide.url }}" alt=""></label>
+            </div>
+          </div>
+        </ng-container>
+      </ngx-slick-carousel>
+</div>
+
+<div class="product-card-section" >
+    <div class="product-card-container" *ngFor="let item of selectedProducts">
+      <div class="product-card" *ngFor="let items of item">
+        {{items.productName}} 
+        <div>R{{items.productRate}}</div>
+        <div class="text-right padding-top-15">
+          <button class="check-coverage-button">Check coverage</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+
